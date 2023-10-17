@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import { Configuration, OpenAIAPI } from "openai";
+import openAiRoutes from "./routes/openai.js";
 
 // CONFIG
 dotenv.config();
@@ -25,7 +26,10 @@ const configuration = new Configuration({
 
 export const openai = new OpenAIAPI(configuration);
 
-// setup for the server
+// ROUTES: openai route will be prefixed before text in the url path http://localhost:1337/openai/text
+app.use("/openai", openAiRoutes);
+
+// SETUP FOR THE SERVER
 
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
