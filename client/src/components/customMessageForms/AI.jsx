@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MessageFormUI from "./MessageFormUI";
 
-const StandardMessageForm = ({ props, activeChat }) => {
+function AI({ props, activeChat }) {
   const [message, setMessage] = useState("");
   const [attachment, setAttachment] = useState("");
 
@@ -13,7 +13,7 @@ const StandardMessageForm = ({ props, activeChat }) => {
       .replace("T", " ")
       .replace("Z", `${Math.floor(Math.random() * 1000)}+00:00`);
     const at = attachment ? [{ blob: attachment, file: attachment.name }] : [];
-    // THIS INFO IS FOUND IN REST API AT CHATENGINE.IO: rest.chatengine.io
+    // note to self: rest.chatengine.io
     const form = {
       attachments: at,
       created: date,
@@ -34,6 +34,6 @@ const StandardMessageForm = ({ props, activeChat }) => {
       handleSubmit={handleSubmit}
     />
   );
-};
+}
 
-export default StandardMessageForm;
+export default AI;
