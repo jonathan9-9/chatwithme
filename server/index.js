@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import { Configuration, OpenAIAPI } from "openai";
+import OpenAI from "openai";
 import openAiRoutes from "./routes/openai.js";
 
 // CONFIG
@@ -20,11 +20,16 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 // Open AI Config
-const configuration = new Configuration({
+
+export const openai = new OpenAI({
   apiKey: process.env.OPEN_API_KEY,
 });
 
-export const openai = new OpenAIAPI(configuration);
+// const configuration = new Configuration({
+//   apiKey: process.env.OPEN_API_KEY,
+// });
+
+// export const openai = new OpenAiAPI(configuration);
 
 // ROUTES: openai route will be prefixed before text in the url path http://localhost:1337/openai/text
 app.use("/openai", openAiRoutes);
